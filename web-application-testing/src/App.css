@@ -1,0 +1,59 @@
+body {
+	margin: 0 auto;
+}
+
+.App {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	/* background-color: blue; */
+	max-width: 1280px;
+	margin: 0 auto;
+}
+
+.app-container {
+	/* max-width: 1280px; */
+	max-width: 900px;
+	min-width: 500px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: blue;
+	margin: 0 auto;
+}
+
+.container {
+	border: 1px solid black;
+	min-width: 400px;
+	max-width: 800px;
+	margin: 20px auto;
+	background-color: lightgray;
+	padding: 10px;
+	border: 1px solid black;
+}
+
+.display {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+.score {
+	width: 100px;
+	display: flex;
+	flex-direction: column;
+	justify-items: center;
+	padding: 10px;
+}
+
+.balls {
+	background-color: white;
+	width: 50px;
+	margin: 0 auto;
+}
+
+.strikes {
+	background-color: white;
+	width: 50px;
+	margin: 0 auto;
+}

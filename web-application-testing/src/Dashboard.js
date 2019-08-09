@@ -1,12 +1,16 @@
 import React from 'react';
 
-const Dashboard = ({balls, strikes, pointTracker}) => {
+const Dashboard = ({ reset, ball, strike, foul, hit }) => {
+    
+  
 	return (
     <>
     <div className="dashboard container">
-    <h1>Dashboard</h1>
-    {/* button will update strike, ball, foul, or hit */}
-      <button>Enter</button>
+    <button onClick={ball}>Ball</button>
+    <button onClick={strike}>Strike</button>
+    <button onClick={hit}>Hit</button>
+    <button onClick={foul}>Foul</button>
+    <button onClick={reset}>Reset</button>
     </div>
     </>
     )

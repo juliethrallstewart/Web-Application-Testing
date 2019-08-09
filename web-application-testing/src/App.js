@@ -23,70 +23,110 @@ function App () {
 		setFouls
 	] = useState(0);
 
-	const [
-		foulball,
-		setFoulBall
-	] = useState(false);
+	// const [
+	// 	foulball,
+	// 	setFoulBall
+	// ] = useState(true);
 
 	const [
 		hits,
 		setHits
 	] = useState(0);
 
+	// useEffect(
+	// 	() => {
+	// 		if (fouls === 1) {
+	// 			setFoulBall(!foulball);
+	// 		}
+	// 	},
+	// 	[
+	// 		fouls
+	// 	]
+	// );
+
+	// useEffect(
+	// 	() => {
+	// 		if (fouls === 1) {
+	// 			setFouls(fouls * 0);
+	// 		}
+	// 	},
+	// 	[
+	// 		fouls
+	// 	]
+	// );
+
 	const pointTracker = (point) => {
 		switch (point) {
 			case 'ball':
-				setBalls(balls, +1);
+				setBalls(balls + 1);
 				break;
 			case 'strike':
-				setStrikes(strikes, +1);
+				setStrikes(strikes + 1);
 				break;
 			case 'foul':
-				setFouls(fouls, +1);
-				setFoulBall(foulball, true);
+				setFouls(fouls + 1);
+				if (strikes < 2) {
+					setStrikes(strikes + 1);
+				}
 				break;
 			case 'hit':
-				setHits(hits, +1);
+				setHits(hits + 1);
+				setStrikes(strikes * 0);
+				setBalls(balls * 0);
 				break;
 			default:
 				alert('game over');
 		}
 	};
 
-	const gameKeeper = ({ balls, strikes, hits, foulBall }) => {
+	const gameKeeper = () => {
 		if (balls >= 4) {
-			setBalls(balls, 0);
+			setBalls(balls * 0);
 		}
-		else if (strikes >= 3) {
-			setStrikes(strikes, 0);
+		if (strikes >= 3) {
+			setStrikes(strikes * 0);
 		}
-		else if (hits === 1) {
-			setBalls(balls, 0);
-			setStrikes(strikes, 0);
+		if (strikes >= 3) {
+			setStrikes(strikes * 0);
 		}
-		else if (foulBall === true) {
-			if (strikes === 0) {
-				setStrikes(strikes, +1);
-			}
-			else if (strikes === 1) {
-				setStrikes(strikes, +2);
-			}
-		}
+	};
+
+	const handleBall = () => {
+		console.log('Ball!');
+		pointTracker('ball');
+		gameKeeper();
+	};
+
+	const handleStrike = () => {
+		console.log('Strike!');
+		pointTracker('strike');
+		gameKeeper();
+	};
+
+	const handleHit = () => {
+		console.log('Hit!');
+		pointTracker('hit');
+		gameKeeper();
+	};
+
+	const handleFoul = () => {
+		console.log('Foul!');
+		pointTracker('foul');
+		gameKeeper();
+	};
+
+	const reset = () => {
+		setStrikes(strikes * 0);
+		setBalls(balls * 0);
+		setHits(hits * 0);
+		setFouls(fouls * 0);
 	};
 
 	return (
 		<div className="App">
 			<div className="app-container">
 				<Display balls={balls} strikes={strikes} hits={hits} fouls={fouls} />
-				<Dashboard
-					balls={balls}
-					strikes={strikes}
-					hits={hits}
-					fouls={fouls}
-					foulball={foulball}
-					pointTracker={pointTracker}
-					gameKeeper={gameKeeper}
-				/>
+				<Dashboard reset={reset} ball={handleBall} strike={handleStrike} hit={handleHit} foul={handleFoul} />
 			</div>
 		</div>
 	);
